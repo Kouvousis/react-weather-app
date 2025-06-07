@@ -3,7 +3,7 @@ import { Search, Cloud } from "lucide-react";
 const SearchBar = () => {
   return (
     <>
-      <div className="flex justify-center items-center">
+      <form className="flex justify-center items-center">
         <div className="flex items-center bg-gray-800 text-white rounded-md overflow-hidden w-full max-w-md">
           <span className="px-3 text-lg">
             <Cloud />
@@ -17,7 +17,7 @@ const SearchBar = () => {
             <Search />
           </button>
         </div>
-      </div>
+      </form>
     </>
   );
 };
