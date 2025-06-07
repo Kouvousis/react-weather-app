@@ -1,9 +1,12 @@
 import Layout from "./components/Layout";
+import SearchBar from "./components/SearchBar";
 
 function App() {
   return (
     <>
-      <Layout></Layout>
+      <Layout>
+        <SearchBar />
+      </Layout>
     </>
   );
 }
