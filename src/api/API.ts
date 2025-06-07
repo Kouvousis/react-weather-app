@@ -1,23 +1,32 @@
-const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
+const API_KEY = import.meta.env.VITE_OPEN_WEATHER_API_KEY;
 const BASE_URL = `https://api.openweathermap.org/data/2.5/weather`;
 
 export interface WeatherData {
-  location: {
-    city: string;
+  name: string;
+  sys: {
     country: string;
   };
-  current: {
-    temp_c: number;
-    condition: {
-      text: string;
-    };
+  main: {
+    temp: number;
+    feels_like: number;
+    humidity: number;
+  };
+  weather: [
+    {
+      main: string;
+      description: string;
+      icon: string;
+    }
+  ];
+  wind: {
+    speed: number;
   };
 }
 
 export const getWeatherData = async (city: string): Promise<WeatherData> => {
   try {
     const response = await fetch(
-      `${BASE_URL}/?q=${city}&appid=${API_KEY}&units=metric`
+      `${BASE_URL}?q=${city}&appid=${API_KEY}&units=metric`
     );
 
     if (!response.ok) {
