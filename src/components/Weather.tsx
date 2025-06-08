@@ -7,7 +7,7 @@ interface WeatherProps {
 const Weather = ({ weatherData: weather }: WeatherProps) => {
   return (
     <div className="pt-4 flex items-center justify-center">
-      <div className="flex flex-col items-center p-6 bg-gray-800 rounded-lg text-white overflow-hidden w-full max-w-md shadow-lg">
+      <div className="flex flex-col items-center p-6 bg-gray-800 opacity-80 rounded-lg text-white overflow-hidden w-full max-w-md shadow-lg">
         <h2 className="text-2xl font-bold mb-4">
           {weather.name}, {weather.sys.country}
         </h2>

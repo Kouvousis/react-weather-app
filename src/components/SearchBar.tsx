@@ -22,7 +22,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
         onSubmit={handleSearch}
         className="flex justify-center items-center"
       >
-        <div className="flex items-center bg-gray-800 text-white rounded-md overflow-hidden w-full max-w-md">
+        <div className="flex items-center bg-gray-800 opacity-80 text-white rounded-md overflow-hidden w-full max-w-md">
           <span className="px-3 text-lg">
             <Cloud />
           </span>
