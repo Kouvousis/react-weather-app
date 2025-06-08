@@ -1,1 +1,41 @@
 @import "tailwindcss";
+
+.atmosphere-background {
+    background-image: url("/public/backgrounds/atmosphere.jpg");
+    background-size:cover
+}
+
+.clear-background {
+    background-image: url("/public/backgrounds/clear.jpg");
+    background-size:cover
+}
+
+.clouds-background {
+    background-image: url("/public/backgrounds/clouds.jpg");
+    background-size:cover
+}
+
+.default-background {
+    background-image: url("/public/backgrounds/default-background.jpg");
+    background-size:cover
+}
+
+.drizzle-background {
+    background-image: url("/public/backgrounds/drizzle.jpg");
+    background-size:cover
+}
+
+.rain-background {
+    background-image: url("/public/backgrounds/rain.jpg");
+}
+
+.snow-background {
+    background-image: url("/public/backgrounds/snow.jpg");
+    background-size:cover
+}
+
+.thunderstorm-background {
+    background-image: url("/public/backgrounds/thunderstorm.jpg");
+    background-size:cover
+
+}
