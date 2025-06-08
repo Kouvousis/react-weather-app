@@ -31,7 +31,7 @@ const Weather = ({ cityName }: WeatherProps) => {
 
   if (loading)
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="pt-4 flex items-center justify-center">
         <span>Loading...</span>
       </div>
     );
@@ -58,7 +58,11 @@ const Weather = ({ cityName }: WeatherProps) => {
             <p className="text-6xl font-bold mb-2">
               {Math.round(weather.main.temp)}°C
             </p>
-            <p className="text-xl capitalize">
+            <p className="flex items-center text-xl capitalize">
+              <img
+                src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
+                alt=""
+              />
               {weather.weather[0].description}
             </p>
           </div>
