@@ -1,52 +1,10 @@
-import { useEffect, useState } from "react";
-import { type WeatherData, getWeatherData } from "../api/API";
+import { type WeatherData } from "../api/API";
 
 interface WeatherProps {
-  cityName: string;
+  weatherData: WeatherData;
 }
 
-const Weather = ({ cityName }: WeatherProps) => {
-  const [weather, setWeather] = useState<WeatherData | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const data = await getWeatherData(cityName);
-        setWeather(data);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "An error occurred");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (cityName) {
-      fetchData();
-    }
-  }, [cityName]);
-
-  if (loading)
-    return (
-      <div className="pt-4 flex items-center justify-center">
-        <span>Loading...</span>
-      </div>
-    );
-
-  if (error)
-    return (
-      <div className="pt-4 flex items-center justify-center">
-        <div className="flex justify-center items-center bg-gray-800 text-white rounded-md overflow-hidden w-full max-w-md">
-          <span>Error: {error}</span>
-        </div>
-      </div>
-    );
-
-  if (!weather) return null;
-
+const Weather = ({ weatherData: weather }: WeatherProps) => {
   return (
     <div className="pt-4 flex items-center justify-center">
       <div className="flex flex-col items-center p-6 bg-gray-800 rounded-lg text-white overflow-hidden w-full max-w-md shadow-lg">
