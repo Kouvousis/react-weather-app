@@ -30,7 +30,7 @@ export const getWeatherData = async (city: string): Promise<WeatherData> => {
     );
 
     if (!response.ok) {
-      throw new Error("Weather data not found");
+      throw new Error("Invalid name.");
     }
 
     const data = await response.json();
