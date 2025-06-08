@@ -61,7 +61,7 @@ function App() {
           </div>
         )}
         {!loading && !error && weatherData && (
-          <Weather weatherData={weatherData} />
+          <Weather weatherData={weatherData} onSelectFavorite={handleSearch} />
         )}
         {!loading && !error && !weatherData && !cityName && (
           <p className="text-white text-center text-xl">

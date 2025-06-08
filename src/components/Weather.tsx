@@ -1,12 +1,35 @@
+import { Heart } from "lucide-react";
 import { type WeatherData } from "../api/API";
+import { useEffect, useState } from "react";
+import Favorites from "./Favorites";
 
 interface WeatherProps {
   weatherData: WeatherData;
+  onSelectFavorite: (cityName: string) => void;
 }
 
-const Weather = ({ weatherData: weather }: WeatherProps) => {
+const Weather = ({ weatherData: weather, onSelectFavorite }: WeatherProps) => {
+  const [favorites, setFavorites] = useState<string[]>(() => {
+    const saved = localStorage.getItem("favoriteWeatherCities");
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  const isFavorite = favorites.includes(weather.name);
+
+  useEffect(() => {
+    localStorage.setItem("favoriteWeatherCities", JSON.stringify(favorites));
+  }, [favorites]);
+
+  const toggleFavorite = () => {
+    if (isFavorite) {
+      setFavorites(favorites.filter((city) => city !== weather.name));
+    } else {
+      setFavorites([...favorites, weather.name]);
+    }
+  };
+
   return (
-    <div className="pt-4 flex items-center justify-center">
+    <div className="pt-4 flex flex-col items-center">
       <div className="flex flex-col items-center p-6 bg-gray-800 opacity-80 rounded-lg text-white overflow-hidden w-full max-w-md shadow-lg">
         <h2 className="text-2xl font-bold mb-4">
           {weather.name}, {weather.sys.country}
@@ -39,8 +62,19 @@ const Weather = ({ weatherData: weather }: WeatherProps) => {
               <p className="text-sm text-gray-300">Wind Speed</p>
               <p className="text-lg font-semibold">{weather.wind.speed} m/s</p>
             </div>
+            <div className="flex justify-start">
+              <button
+                className="bg-gray-900 rounded-md p-2 hover:opacity-70"
+                onClick={toggleFavorite}
+              >
+                <Heart fill={isFavorite ? "white" : "none"} />
+              </button>
+            </div>
           </div>
         </div>
+      </div>
+      <div className="w-full max-w-md mt-4">
+        <Favorites favorites={favorites} onSelectCity={onSelectFavorite} />
       </div>
     </div>
   );
