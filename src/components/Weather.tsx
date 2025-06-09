@@ -1,32 +1,19 @@
 import { Heart } from "lucide-react";
 import { type WeatherData } from "../interfaces/WeatherData";
-import { useEffect, useState } from "react";
-import Favorites from "./Favorites";
 
 interface WeatherProps {
   weatherData: WeatherData;
   onSelectFavorite: (cityName: string) => void;
+  favorites: string[];
+  onToggleFavorite: (cityName: string) => void;
 }
 
-const Weather = ({ weatherData: weather, onSelectFavorite }: WeatherProps) => {
-  const [favorites, setFavorites] = useState<string[]>(() => {
-    const saved = localStorage.getItem("favoriteWeatherCities");
-    return saved ? JSON.parse(saved) : [];
-  });
-
+const Weather = ({
+  weatherData: weather,
+  favorites,
+  onToggleFavorite,
+}: WeatherProps) => {
   const isFavorite = favorites.includes(weather.name);
-
-  useEffect(() => {
-    localStorage.setItem("favoriteWeatherCities", JSON.stringify(favorites));
-  }, [favorites]);
-
-  const toggleFavorite = () => {
-    if (isFavorite) {
-      setFavorites(favorites.filter((city) => city !== weather.name));
-    } else {
-      setFavorites([...favorites, weather.name]);
-    }
-  };
 
   return (
     <div className="pt-4 flex flex-col items-center">
@@ -65,16 +52,13 @@ const Weather = ({ weatherData: weather, onSelectFavorite }: WeatherProps) => {
             <div className="flex justify-start">
               <button
                 className="bg-gray-900 rounded-md p-2 hover:opacity-70"
-                onClick={toggleFavorite}
+                onClick={() => onToggleFavorite(weather.name)}
               >
                 <Heart fill={isFavorite ? "white" : "none"} />
               </button>
             </div>
           </div>
         </div>
-      </div>
-      <div className="w-full max-w-md mt-4">
-        <Favorites favorites={favorites} onSelectCity={onSelectFavorite} />
       </div>
     </div>
   );

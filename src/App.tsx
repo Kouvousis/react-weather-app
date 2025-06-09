@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import Layout from "./components/Layout";
 import SearchBar from "./components/SearchBar";
 import Weather from "./components/Weather";
+import Favorites from "./components/Favorites";
 import { getWeatherData } from "./api/API";
 import { type WeatherData } from "./interfaces/WeatherData";
 
@@ -10,6 +11,22 @@ function App() {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [favorites, setFavorites] = useState<string[]>(() => {
+    const saved = localStorage.getItem("favoriteWeatherCities");
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("favoriteWeatherCities", JSON.stringify(favorites));
+  }, [favorites]);
+
+  const toggleFavorite = (cityName: string) => {
+    setFavorites((prev) =>
+      prev.includes(cityName)
+        ? prev.filter((city) => city !== cityName)
+        : [...prev, cityName]
+    );
+  };
 
   const fetchWeather = useCallback(async (city: string) => {
     setLoading(true);
@@ -62,13 +79,21 @@ function App() {
           </div>
         )}
         {!loading && !error && weatherData && (
-          <Weather weatherData={weatherData} onSelectFavorite={handleSearch} />
+          <Weather
+            weatherData={weatherData}
+            onSelectFavorite={handleSearch}
+            favorites={favorites}
+            onToggleFavorite={toggleFavorite}
+          />
         )}
         {!loading && !error && !weatherData && !cityName && (
           <p className="text-white text-center text-xl">
             Search for a city to get weather details.
           </p>
         )}
+        <div className="w-full max-w-md mt-4 mx-auto pb-4">
+          <Favorites favorites={favorites} onSelectCity={handleSearch} />
+        </div>
       </Layout>
     </>
   );
