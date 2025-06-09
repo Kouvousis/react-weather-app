@@ -1,4 +1,4 @@
-import { Search, Cloud } from "lucide-react";
+import { Search, Thermometer } from "lucide-react";
 import { useState } from "react";
 
 interface SearchBarProps {
@@ -24,7 +24,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
       >
         <div className="flex items-center bg-gray-800 opacity-80 text-white rounded-md overflow-hidden w-full max-w-md">
           <span className="px-3 text-lg">
-            <Cloud />
+            <Thermometer />
           </span>
           <input
             type="text"
