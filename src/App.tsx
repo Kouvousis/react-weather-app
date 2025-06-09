@@ -2,7 +2,8 @@ import { useState, useEffect, useCallback } from "react";
 import Layout from "./components/Layout";
 import SearchBar from "./components/SearchBar";
 import Weather from "./components/Weather";
-import { getWeatherData, type WeatherData } from "./api/API";
+import { getWeatherData } from "./api/API";
+import { type WeatherData } from "./interfaces/WeatherData";
 
 function App() {
   const [cityName, setCityName] = useState<string>("");

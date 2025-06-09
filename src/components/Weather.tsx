@@ -1,5 +1,5 @@
 import { Heart } from "lucide-react";
-import { type WeatherData } from "../api/API";
+import { type WeatherData } from "../interfaces/WeatherData";
 import { useEffect, useState } from "react";
 import Favorites from "./Favorites";
 

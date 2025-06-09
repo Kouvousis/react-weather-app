@@ -1,4 +1,4 @@
-import type { WeatherData } from "../api/API";
+import { type WeatherData } from "../interfaces/WeatherData";
 import Header from "./Header";
 
 interface LayoutProps {

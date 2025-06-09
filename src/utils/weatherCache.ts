@@ -1,5 +1,5 @@
 import localforage from "localforage";
-import { type WeatherData } from "../api/API";
+import { type WeatherData } from "../interfaces/WeatherData";
 
 interface CachedData {
   data: WeatherData;
